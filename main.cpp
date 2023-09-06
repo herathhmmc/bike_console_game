@@ -28,7 +28,7 @@ void logic();
 // init-Variables
 bool gameOver = true;
 bool quit = false;
-int mapX = 60, mapY = 25;
+int mapX = 60, mapY = 30;
 int x, y, health;
 enum eDirect
 {
@@ -39,6 +39,48 @@ enum eDirect
     DOWN
 };
 eDirect dir;
+int spawnX = 5;
+int spawnY = mapY/2;
+
+// Game-objects-enemies-and-traps;
+std::string ballObj = "@";
+std::string spidObj =
+    "  / _ \\\n"
+    "\\_\\(_)/_/\n"
+    " _//\"\\\\_ \n"
+    "  /   \\  \n";
+
+std::string trapObj = "/\\";
+
+std::string bikeObj =
+    "                      ;~\\.\n"
+    "        .              _._\\\")\n"
+    "        I\\___        ,;)))}^\\\n"
+    "        I `%%^\\%%%%.::q::    `\\.\n"
+    "      .*//*.    OOO  }}} ))    .\\8^8*.\n"
+    "   =LIEF()ZIMMERMAN(((((()'    --(*)--\n"
+    "      \"*oo*\"                   \"*ooo*\"\n";
+
+std::string expObj =
+    "     _.-^^---....,,--       \n"
+    " _--                  --_  \n"
+    "<                        >)\n"
+    "|                         | \n"
+    " \\._                   _./  \n"
+    "    ```--. . , ; .--'''       \n"
+    "          | |   |             \n"
+    "       .-=||  | |=-.           \n"
+    "       `-=#$%&%$#=-'           \n"
+    "          | ;  :|              \n"
+    " _____.,-#%&$@%#&#~,._____   \n";
+
+std::string bombObj =
+    "        ,--.!,\n"
+    "     __/   -*-\n"
+    "   ,d08b.  '|`\n"
+    "   0088MM\n"
+    "   `9MMP'\n";
+
 
 // the-main-method
 int main()
@@ -60,9 +102,15 @@ int main()
         }
     }
 
-    if(quit){
+    if (quit)
+    {
         system("cls");
-        std::cout<<"\n\n\t\t##########################################\n\n\t\tProudly Presented by Programming Group 16.\n\n\t\t##########################################\n\n\n\n";
+        std::cout << "\n\n\t\t##########################################\n\n\t\tProudly Presented by Programming Group 16.\n\n\t\t##########################################\n\n\n\n";
+        std::cout<<bikeObj<<std::endl<<std::endl;
+        std::cout<<spidObj<<std::endl<<std::endl;
+        std::cout<<trapObj<<std::endl<<std::endl;
+        std::cout<<expObj<<std::endl<<std::endl;
+        std::cout<<bombObj<<std::endl<<std::endl;
     }
 
     return 0;
@@ -129,7 +177,7 @@ void menu()
         std::cout << "\t01. W - for Jump. \n";
         std::cout << "\t02. S - for Instant Down. \n";
         std::cout << "\t03. A - for Going Left. \n";
-        std::cout << "\n04. D - for Going Right. \n";
+        std::cout << "\t04. D - for Going Right. \n";
         std::cout << "\t05. X - for Froce Stop and Quit Game; ";
 
         std::cout << "For quit : 1 \nFor New Game : 2 \n\n  Answer : ";
