@@ -16,12 +16,16 @@
 #include <windows.h>
 #include <cstdlib>
 #include <string>
+#include <cstring>
 
 // init-other-functions
 
 void setup();
 void menu();
-void draw();
+void draw_lv1();
+void draw_lv2();
+void draw_lv3();
+void draw_lv4();
 void input();
 void logic();
 
@@ -29,7 +33,10 @@ void logic();
 bool gameOver = true;
 bool quit = false;
 int mapX = 60, mapY = 30;
-int x, y, health;
+int x, y;
+int levelPass = 1;
+int wallSize = 3;
+int score;
 enum eDirect
 {
     STOP = 0,
@@ -40,7 +47,7 @@ enum eDirect
 };
 eDirect dir;
 int spawnX = 5;
-int spawnY = mapY/2;
+int spawnY = mapY / 2;
 
 // Game-objects-enemies-and-traps;
 std::string ballObj = "@";
@@ -61,28 +68,10 @@ std::string bikeObj =
     "   =LIEF()ZIMMERMAN(((((()'    --(*)--\n"
     "      \"*oo*\"                   \"*ooo*\"\n";
 
-std::string expObj =
-    "     _.-^^---....,,--       \n"
-    " _--                  --_  \n"
-    "<                        >)\n"
-    "|                         | \n"
-    " \\._                   _./  \n"
-    "    ```--. . , ; .--'''       \n"
-    "          | |   |             \n"
-    "       .-=||  | |=-.           \n"
-    "       `-=#$%&%$#=-'           \n"
-    "          | ;  :|              \n"
-    " _____.,-#%&$@%#&#~,._____   \n";
-
-std::string bombObj =
-    "        ,--.!,\n"
-    "     __/   -*-\n"
-    "   ,d08b.  '|`\n"
-    "   0088MM\n"
-    "   `9MMP'\n";
-
+char arr[5][10];
 
 // the-main-method
+
 int main()
 {
 
@@ -95,10 +84,10 @@ int main()
         }
         while (!gameOver)
         {
-            draw();
+            draw_lv1();
             input();
             logic();
-            Sleep(20);
+            Sleep(300);
         }
     }
 
@@ -106,11 +95,6 @@ int main()
     {
         system("cls");
         std::cout << "\n\n\t\t##########################################\n\n\t\tProudly Presented by Programming Group 16.\n\n\t\t##########################################\n\n\n\n";
-        std::cout<<bikeObj<<std::endl<<std::endl;
-        std::cout<<spidObj<<std::endl<<std::endl;
-        std::cout<<trapObj<<std::endl<<std::endl;
-        std::cout<<expObj<<std::endl<<std::endl;
-        std::cout<<bombObj<<std::endl<<std::endl;
     }
 
     return 0;
@@ -132,6 +116,12 @@ void setup()
     */
 
     int health = 100;
+
+    strcpy(arr[0], "   ##  \n");
+    strcpy(arr[1], "## ## ##\n");
+    strcpy(arr[2], "   ##  \n");
+    strcpy(arr[3], "   ##  \n");
+    strcpy(arr[4], "##    ##");
 }
 
 void menu()
@@ -199,7 +189,7 @@ void menu()
     }
 }
 
-void draw()
+void draw_lv1()
 {
     /*
         @return void
@@ -210,25 +200,45 @@ void draw()
     system("cls");
 
     // upper-map-frame
-    std::cout << " ";
-    for (int i = 0; i < mapX; i++)
+    for (int i = 0; i <= mapX; i++)
         std::cout << "#";
     std::cout << std::endl;
 
     // draw-middle-part
     for (int i = 0; i < mapY; i++)
     {
-        for (int j = 0; j <= mapX; j++)
+        // for (int j = 0; j <= mapX; j++)
+        // {
+        //     if (j == 0)
+        //     {
+        //         std::cout << "#";
+        //     }
+        //     if (j == mapX)
+        //     {
+        //         std::cout << "#";
+        //     }
+        //     else
+        //     {
+        //         std::cout << " ";
+        //     }
+        // }
+        // std::cout << std::endl;
+
+        for (int j = 0; j < mapX; j++)
         {
-            if (j == 0)
+            if (j < wallSize)
             {
                 std::cout << "#";
             }
-            if (j == mapX)
+            if (j >= (mapX - wallSize))
             {
                 std::cout << "#";
             }
-            else
+            if (j == wallSize)
+            {
+                std::cout << " ";
+            }
+            if (j >= wallSize && j < (mapX - wallSize))
             {
                 std::cout << " ";
             }
@@ -237,8 +247,7 @@ void draw()
     }
 
     // lower-map-frame
-    std::cout << " ";
-    for (int i = 0; i < mapX; i++)
+    for (int i = 0; i <= mapX; i++)
         std::cout << "#";
     std::cout << std::endl;
 }
