@@ -7,7 +7,7 @@
 //  88   8D `8b  d8' 88b  d88 88  V888 Y8b  d8 88.
 //  Y8888P'  `Y88P'  ~Y8888P' VP   V8P  `Y88P' Y88888P
 //
-//                    The-bounce-game
+//                    The-Bike-Game
 
 // include-additional libraries
 
@@ -23,15 +23,17 @@
 void setup();
 void menu();
 void draw_lv1();
-void draw_lv2();
-void draw_lv3();
-void draw_lv4();
+//void draw_lv2();
+//void draw_lv3();
+//void draw_lv4();
 void input();
 void logic();
+void draw_bike();
 
 // init-Variables
 bool gameOver = true;
 bool quit = false;
+bool bikeCord = false;
 int mapX = 60, mapY = 30;
 int x, y;
 int levelPass = 1;
@@ -68,7 +70,7 @@ std::string bikeObj =
     "   =LIEF()ZIMMERMAN(((((()'    --(*)--\n"
     "      \"*oo*\"                   \"*ooo*\"\n";
 
-char arr[5][10];
+char arr[5][8];
 
 // the-main-method
 
@@ -78,10 +80,10 @@ int main()
     while (!quit)
     {
         setup();
-        while (gameOver && !quit)
+        /*while (gameOver && !quit)
         {
             menu();
-        }
+        }*/
         while (!gameOver)
         {
             draw_lv1();
@@ -95,6 +97,8 @@ int main()
     {
         system("cls");
         std::cout << "\n\n\t\t##########################################\n\n\t\tProudly Presented by Programming Group 16.\n\n\t\t##########################################\n\n\n\n";
+        std::cout << "\n\n\t\t"
+                  << bikeObj << "\n\n";
     }
 
     return 0;
@@ -117,10 +121,10 @@ void setup()
 
     int health = 100;
 
-    strcpy(arr[0], "   ##  \n");
-    strcpy(arr[1], "## ## ##\n");
-    strcpy(arr[2], "   ##  \n");
-    strcpy(arr[3], "   ##  \n");
+    strcpy(arr[0], "   ##  ");
+    strcpy(arr[1], "## ## ##");
+    strcpy(arr[2], "   ##  ");
+    strcpy(arr[3], "   ##  ");
     strcpy(arr[4], "##    ##");
 }
 
@@ -140,7 +144,7 @@ void menu()
         "  88   8D `8b  d8' 88b  d88 88  V888 Y8b  d8 88.     \n"
         "  Y8888P'  `Y88P'   Y8888P' VP   V8P  `Y88P' Y88888P \n"
         "                                                     \n"
-        "                    The-bounce-game                  \n";
+        "                    The-bike-game                  \n";
 
     std::string overIcon =
         "  dP\"\"b8    db    8b    d8 888888      dP\"Yb  Yb    dP 888888 88\"\"Yb \n"
@@ -170,7 +174,7 @@ void menu()
         std::cout << "\t04. D - for Going Right. \n";
         std::cout << "\t05. X - for Froce Stop and Quit Game; ";
 
-        std::cout << "For quit : 1 \nFor New Game : 2 \n\n  Answer : ";
+        std::cout << "\n\nFor quit : 1 \nFor New Game : 2 \n\n  Answer : ";
         std::cin >> choise;
         if (choise == 1)
         {
@@ -280,4 +284,13 @@ void input()
 
 void logic()
 {
+}
+
+
+bool draw_bike(int draw_x,int draw_y,int currentX,int currentY,bool draw_or_not){
+    draw_or_not = false;
+    if(currentX == draw_x && currentY == draw_y){
+        
+    }
+
 }
