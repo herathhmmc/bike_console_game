@@ -38,6 +38,7 @@ bool gameOver = true;
 bool quit = false;
 bool bikeCord = false;
 int mapX = 60, mapY = 30;
+int bike_health = 100;
 int x, y;
 int enemyX, enemyY;
 int levelPass = 1;
