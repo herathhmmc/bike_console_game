@@ -29,6 +29,9 @@ void draw_lv1();
 void input();
 void logic();
 bool draw_bike(int draw_x, int draw_y, int currentX, int currentY);
+bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY);
+bool isGameOver(int enemyX, int enemyY, int x, int y);
+
 
 // init-Variables
 bool gameOver = true;
@@ -36,9 +39,10 @@ bool quit = false;
 bool bikeCord = false;
 int mapX = 60, mapY = 30;
 int x, y;
+int enemyX, enemyY;
 int levelPass = 1;
 int wallSize = 3;
-int score;
+int score = 0;
 enum eDirect
 {
     STOP = 0,
@@ -87,6 +91,7 @@ int main()
             draw_lv1();
             input();
             logic();
+            gameOver = isGameOver(enemyX,enemyY,x,y);
             Sleep(16);
         }
     }
@@ -120,6 +125,9 @@ void setup()
     int health = 100;
     x = mapX / 2;
     y = mapY / 2;
+
+    enemyX = wallSize + rand() % static_cast<int>(mapX - (2 * wallSize));
+    enemyY = 3;
 }
 
 void menu()
@@ -187,6 +195,15 @@ void menu()
     }
 }
 
+bool isGameOver(int enemyX, int enemyY, int x, int y)
+{
+    if (enemyY + 4 == y && enemyX + 7 >= x)
+    {
+        return true;
+    }
+    return false;
+}
+
 void draw_lv1()
 {
     system("cls");
@@ -230,7 +247,7 @@ void draw_lv1()
             {
                 std::cout << " ";
             }
-            if (draw_bike(x, y, j, i))
+            if (draw_bike(x, y, j, i) || draw_enemy(enemyX, enemyY, j, i))
             {
                 std::cout << "#";
             }
@@ -300,6 +317,12 @@ void logic()
         y = 0;
     else if (y < 0)
         y = mapY - 1;
+
+    enemyY = enemyY + 2;
+    if (enemyY > mapY)
+    {
+        enemyY = 0;
+    }
 }
 
 bool draw_bike(int draw_x, int draw_y, int currentX, int currentY)
@@ -367,6 +390,79 @@ bool draw_bike(int draw_x, int draw_y, int currentX, int currentY)
             return true;
         }
         if (currentX == draw_x + 7 && currentY == draw_y + 4)
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY)
+{
+    if (currentX <= (draw_x + 7) && currentY <= (draw_y + 4))
+    {
+        if (currentX == draw_x && currentY == draw_y)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 1 && currentY == draw_y)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 6 && currentY == draw_y)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 7 && currentY == draw_y)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 3 && currentY == draw_y + 1)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 4 && currentY == draw_y + 1)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 3 && currentY == draw_y + 2)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 4 && currentY == draw_y + 2)
+        {
+            return true;
+        }
+        if (currentX == draw_x && currentY == draw_y + 3)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 1 && currentY == draw_y + 3)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 3 && currentY == draw_y + 3)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 4 && currentY == draw_y + 3)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 6 && currentY == draw_y + 3)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 7 && currentY == draw_y + 3)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 3 && currentY == draw_y + 4)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 4 && currentY == draw_y + 4)
         {
             return true;
         }
