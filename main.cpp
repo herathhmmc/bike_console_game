@@ -23,12 +23,12 @@
 void setup();
 void menu();
 void draw_lv1();
-//void draw_lv2();
-//void draw_lv3();
-//void draw_lv4();
+// void draw_lv2();
+// void draw_lv3();
+// void draw_lv4();
 void input();
 void logic();
-void draw_bike();
+bool draw_bike(int draw_x, int draw_y, int currentX, int currentY);
 
 // init-Variables
 bool gameOver = true;
@@ -70,8 +70,6 @@ std::string bikeObj =
     "   =LIEF()ZIMMERMAN(((((()'    --(*)--\n"
     "      \"*oo*\"                   \"*ooo*\"\n";
 
-char arr[5][8];
-
 // the-main-method
 
 int main()
@@ -80,16 +78,16 @@ int main()
     while (!quit)
     {
         setup();
-        /*while (gameOver && !quit)
+        while (gameOver && !quit)
         {
             menu();
-        }*/
+        }
         while (!gameOver)
         {
             draw_lv1();
             input();
             logic();
-            Sleep(300);
+            Sleep(16);
         }
     }
 
@@ -97,7 +95,7 @@ int main()
     {
         system("cls");
         std::cout << "\n\n\t\t##########################################\n\n\t\tProudly Presented by Programming Group 16.\n\n\t\t##########################################\n\n\n\n";
-        std::cout << "\n\n\t\t"
+        std::cout << "\n\n"
                   << bikeObj << "\n\n";
     }
 
@@ -120,12 +118,8 @@ void setup()
     */
 
     int health = 100;
-
-    strcpy(arr[0], "   ##  ");
-    strcpy(arr[1], "## ## ##");
-    strcpy(arr[2], "   ##  ");
-    strcpy(arr[3], "   ##  ");
-    strcpy(arr[4], "##    ##");
+    x = mapX / 2;
+    y = mapY / 2;
 }
 
 void menu()
@@ -195,12 +189,6 @@ void menu()
 
 void draw_lv1()
 {
-    /*
-        @return void
-        - draw objects,map,stars and traps
-        - draw bounce
-    */
-
     system("cls");
 
     // upper-map-frame
@@ -242,7 +230,11 @@ void draw_lv1()
             {
                 std::cout << " ";
             }
-            if (j >= wallSize && j < (mapX - wallSize))
+            if (draw_bike(x, y, j, i))
+            {
+                std::cout << "#";
+            }
+            else if (j >= wallSize && j < (mapX - wallSize))
             {
                 std::cout << " ";
             }
@@ -284,13 +276,101 @@ void input()
 
 void logic()
 {
-}
-
-
-bool draw_bike(int draw_x,int draw_y,int currentX,int currentY,bool draw_or_not){
-    draw_or_not = false;
-    if(currentX == draw_x && currentY == draw_y){
-        
+    switch (dir)
+    {
+    case LEFT:
+        x = x - 2;
+        break;
+    case RIGHT:
+        x = x + 2;
+        break;
+    case UP:
+        y--;
+        break;
+    case DOWN:
+        y++;
+        break;
     }
 
+    if (x >= mapX - (wallSize + 8))
+        x = wallSize;
+    else if (x < wallSize)
+        x = (mapX - wallSize - 8);
+    if (y >= mapY)
+        y = 0;
+    else if (y < 0)
+        y = mapY - 1;
+}
+
+bool draw_bike(int draw_x, int draw_y, int currentX, int currentY)
+{
+    if (currentX <= (draw_x + 7) && currentY <= (draw_y + 4))
+    {
+        if (currentX == draw_x + 3 && currentY == draw_y)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 4 && currentY == draw_y)
+        {
+            return true;
+        }
+        if (currentX == draw_x && currentY == draw_y + 1)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 1 && currentY == draw_y + 1)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 3 && currentY == draw_y + 1)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 4 && currentY == draw_y + 1)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 6 && currentY == draw_y + 1)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 7 && currentY == draw_y + 1)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 3 && currentY == draw_y + 2)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 4 && currentY == draw_y + 2)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 3 && currentY == draw_y + 3)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 4 && currentY == draw_y + 3)
+        {
+            return true;
+        }
+        if (currentX == draw_x && currentY == draw_y + 4)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 1 && currentY == draw_y + 4)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 6 && currentY == draw_y + 4)
+        {
+            return true;
+        }
+        if (currentX == draw_x + 7 && currentY == draw_y + 4)
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
 }
