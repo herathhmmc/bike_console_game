@@ -105,7 +105,7 @@ int main()
             draw_lv1();
             input();
             logic();
-            Sleep(16);
+            Sleep(10);
             if(gameOver){
                 system("cls");
                 std::cout<<"\n\n\n"<<overIcon;
