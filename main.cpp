@@ -22,10 +22,8 @@
 
 void setup();
 void menu();
-int checkLevelPass(int value, int level);
-void draw_lv1();
-void draw_lv2();
-void draw_lv3();
+void draw_lv();
+void draw_game();
 void input();
 void logic();
 bool draw_bike(int draw_x, int draw_y, int currentX, int currentY);
@@ -44,6 +42,7 @@ int enemyX, enemyY;
 int levelPass = 1;
 int wallSize = 3;
 int score = 0;
+std::string playerName;
 enum eDirect
 {
     STOP = 0,
@@ -67,13 +66,13 @@ std::string spidObj =
 std::string trapObj = "/\\";
 
 std::string bikeObj =
-    "                      ;~\\.\n"
-    "        .              _._\\\")\n"
-    "        I\\___        ,;)))}^\\\n"
-    "        I `%%^\\%%%%.::q::    `\\.\n"
-    "      .*//*.    OOO  }}} ))    .\\8^8*.\n"
-    "   =LIEF()ZIMMERMAN(((((()'    --(*)--\n"
-    "      \"*oo*\"                   \"*ooo*\"\n";
+    "\t                      ;~\\.\n"
+    "\t        .              _._\\\")\n"
+    "\t        I\\___        ,;)))}^\\\n"
+    "\t        I `%%^\\%%%%.::q::    `\\.\n"
+    "\t      .*//*.    OOO  }}} ))    .\\8^8*.\n"
+    "\t   =LIEF()ZIMMERMAN(((((()'    --(*)--\n"
+    "\t      \"*oo*\"                   \"*ooo*\"\n";
 
 std::string overIcon =
     "     .d8888b.                                          .d88888b.\n"
@@ -109,6 +108,43 @@ std::string lv_3 =
     "\t\t88booo. 88.      `8bd8'  88.     88booo.                  db   8D\n"
     "\t\tY88888P Y88888P    YP    Y88888P Y88888P                  Y8888P'\n";
 
+std::string creditsObj =
+    "\n\n\t\t\t _____              _ _ _       \n"
+    "\t\t\t/  __ \\            | (_) |      \n"
+    "\t\t\t| /  \\/_ __ ___  __| |_| |_ ___ \n"
+    "\t\t\t| |   | '__/ _ \\/ _` | | __/ __|\n"
+    "\t\t\t| \\__/\\ | |  __/ (_| | | |\\__ \\ \n"
+    "\t\t\t \\____/_|  \\___|\\__,_|_|_||___/\n"
+    "\t\t\t                                \n";
+
+std::string InstrObj =
+    "\n\t  _    _                 _          _____  _             \n"
+    "\t | |  | |               | |        |  __ \\| |            \n"
+    "\t | |__| | _____      __ | |_ ___   | |__) | | __ _ _   _ \n"
+    "\t |  __  |/ _ \\ \\ /\\ / / | __/ _ \\  |  ___/| |/ _` | | | |\n"
+    "\t | |  | | (_) \\ V  V /  | || (_) | | |    | | (_| | |_| |\n"
+    "\t |_|  |_|\\___/ \\_/\\_/    \\__\\___/  |_|    |_|\\__,_|\\__, |\n"
+    "\t                                                    __/ |\n"
+    "\t                                                   |___/ \n";
+
+std::string menuIcon =
+    "    888b     d888          888                    .d8888b.  8888888b.\n"
+    "    8888b   d8888          888                   d88P  Y88b 888   Y88b\n"
+    "    88888b.d88888          888                   888    888 888    888\n"
+    "    888Y88888P888  .d88b.  888888 .d88b.         888        888   d88P\n"
+    "    888 Y888P 888 d88\"\"88b 888   d88\"\"88b        888  88888 8888888P\"\n"
+    "    888  Y8P  888 888  888 888   888  888 888888 888    888 888\n"
+    "    888   \"   888 Y88..88P Y88b. Y88..88P        Y88b  d88P 888\n"
+    "    888       888  \"Y88P\"   \"Y888 \"Y88P\"          \"Y8888P88 888\n";
+
+std::string playerIdObj =
+    "\n\t    ____  __                         ________ \n"
+    "\t   / __ \\/ /___ ___  _____  _____   /  _/ __ \\\n"
+    "\t  / /_/ / / __ `/ / / / _ \\/ ___/   / // / / /\n"
+    "\t / ____/ / /_/ / /_/ /  __/ /     _/ // /_/ / \n"
+    "\t/_/   /_/\\__,_/\\__, /\\___/_/     /___/_____/  \n"
+    "\t              /____/                          \n";
+
 // the-main-method
 
 int main()
@@ -120,85 +156,60 @@ int main()
         while (gameOver && !quit)
         {
             score = 0;
+            wallSize = 3;
             menu();
         }
-        if (score >= 0 && score<=100 && !gameOver)
+        if (score >= 0 && score <= 100 && !gameOver)
         {
             system("cls");
-            std::cout<<lv_1;
+            std::cout << lv_1;
             Sleep(1500);
             system("cls");
             while (!gameOver)
             {
-                gameOver = isGameOver(enemyX, enemyY, x, y);
-                draw_lv1();
-                input();
-                logic();
-                Sleep(10);
-                if(score>=100){
-                    break;
-                }
-                if (gameOver)
+
+                draw_lv();
+                draw_game();
+                if (score >= 100)
                 {
-                    system("cls");
-                    std::cout << "\n\n\n"
-                              << overIcon;
-                    std::cout << "\n\n\t\t\t\t\tYour Score : " << score;
-                    Sleep(2000);
+                    break;
                 }
             }
         }
-        if (score >= 100 && score<=200 && !gameOver)
+        if (score >= 100 && score <= 200 && !gameOver)
         {
             system("cls");
-            std::cout<<lv_2;
+            std::cout << lv_2;
             Sleep(1500);
             system("cls");
             wallSize += 3;
             while (!gameOver)
             {
-                gameOver = isGameOver(enemyX, enemyY, x, y);
-                draw_lv2();
-                input();
-                logic();
-                Sleep(10);
-                if(score >= 200){
-                    break;
-                }
-                if (gameOver)
+
+                draw_lv();
+                draw_game();
+                if (score >= 200)
                 {
-                    system("cls");
-                    std::cout << "\n\n\n"
-                              << overIcon;
-                    std::cout << "\n\n\t\t\t\t\tYour Score : " << score;
-                    Sleep(2000);
+                    break;
                 }
             }
         }
-        if (score >= 200 && score<=300 && !gameOver)
+        if (score >= 200 && score <= 300 && !gameOver)
         {
             system("cls");
-            std::cout<<lv_3;
+            std::cout << lv_3;
             Sleep(1500);
             system("cls");
             wallSize += 3;
             while (!gameOver)
             {
-                gameOver = isGameOver(enemyX, enemyY, x, y);
-                draw_lv3();
-                input();
-                logic();
+
+                draw_lv();
+                draw_game();
                 Sleep(10);
-                if(score>=300){
-                    break;
-                }
-                if (gameOver)
+                if (score >= 300)
                 {
-                    system("cls");
-                    std::cout << "\n\n\n"
-                              << overIcon;
-                    std::cout << "\n\n\t\t\t\t\tYour Score : " << score;
-                    Sleep(2000);
+                    break;
                 }
             }
         }
@@ -253,38 +264,40 @@ void menu()
         - main-menu-of-the-game
     */
 
-    std::string menuIcon =
-        "    888b     d888          888                    .d8888b.  8888888b.\n"
-        "    8888b   d8888          888                   d88P  Y88b 888   Y88b\n"
-        "    88888b.d88888          888                   888    888 888    888\n"
-        "    888Y88888P888  .d88b.  888888 .d88b.         888        888   d88P\n"
-        "    888 Y888P 888 d88\"\"88b 888   d88\"\"88b        888  88888 8888888P\"\n"
-        "    888  Y8P  888 888  888 888   888  888 888888 888    888 888\n"
-        "    888   \"   888 Y88..88P Y88b. Y88..88P        Y88b  d88P 888\n"
-        "    888       888  \"Y88P\"   \"Y888 \"Y88P\"          \"Y8888P88 888\n";
-
     system("cls");
     std::cout << menuIcon;
     std::cout << std::endl;
     std::cout << "\t\t\t Sri-Lankan-Version" << std::endl;
     std::cout << std::endl;
     int choise;
-    std::cout << "\t\t1. New Game \n\t\t2. Instructions \n\t\t3.Quit \n\n\t>>";
+    std::cout << "\t\t1. New Game \n\t\t2. Instructions \n\t\t3. Quit \n\n\t>>";
     std::cin >> choise;
 
     if (choise == 1)
+    {
+        system("cls");
+        std::cin.ignore();
+        std::cout << playerIdObj;
+        std::cout << "\n\n\n\t\tPlease Enter Your Name : ";
+        getline(std::cin, playerName);
+        Sleep(1000);
+        if (playerName.empty())
+        {
+            playerName = "Unknown";
+        }
         gameOver = false;
+    }
     else if (choise == 3)
         quit = true;
     else
     {
         system("cls");
-        std::cout << "\n\n\n\n\t----Instructions----\n";
-        std::cout << "\t01. W - for Jump. \n";
+        std::cout << InstrObj;
+        std::cout << "\n\n\t01. W - for Jump. \n";
         std::cout << "\t02. S - for Instant Down. \n";
         std::cout << "\t03. A - for Going Left. \n";
         std::cout << "\t04. D - for Going Right. \n";
-        std::cout << "\t05. X - for Froce Stop and Quit Game; ";
+        std::cout << "\t05. X - for Force Stop and Quit Game; ";
 
         std::cout << "\n\nFor quit : 1 \nFor New Game : 2 \n\n  Answer : ";
         std::cin >> choise;
@@ -305,6 +318,24 @@ void menu()
     }
 }
 
+void draw_game()
+{
+    gameOver = isGameOver(enemyX, enemyY, x, y);
+    input();
+    logic();
+    Sleep(10);
+    if (gameOver)
+    {
+        system("cls");
+        std::cout << "\n\n\n"
+                  << overIcon;
+        std::cout << "\n\n\t\t\t\t\tYour Score : " << score;
+        Sleep(2000);
+    }
+    std::cout << "\n\n\t\t\tYour Score : " << score;
+    std::cout << "\n\t\t\tYour PlayerID : " << playerName;
+}
+
 bool isGameOver(int enemyX, int enemyY, int x, int y)
 {
     bool condition1 = (enemyX <= x && enemyX + 7 >= x) && (enemyY <= y && enemyY + 4 >= y);
@@ -316,31 +347,7 @@ bool isGameOver(int enemyX, int enemyY, int x, int y)
     return false;
 }
 
-int checkLevelPass(int value, int level)
-{
-    if (value <= 100 && level == 1)
-    {
-        level++;
-        return level;
-    }
-    if (value <= 200 && level == 2)
-    {
-        level++;
-        return level;
-    }
-    if (value <= 300 && level == 3)
-    {
-        level++;
-        return level;
-    }
-    if (level == 4)
-    {
-        level++;
-        return level;
-    }
-}
-
-void draw_lv1()
+void draw_lv()
 {
     system("cls");
 
@@ -382,16 +389,6 @@ void draw_lv1()
     for (int i = 0; i <= mapX; i++)
         std::cout << "#";
     std::cout << std::endl;
-}
-
-void draw_lv2()
-{
-    draw_lv1();
-}
-
-void draw_lv3()
-{
-    draw_lv1();
 }
 
 void input()
@@ -605,6 +602,7 @@ bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY)
 void credits()
 {
     system("cls");
-    std::cout << "\n\n\n\n\t\t\tUshan Ikshana";
+    std::cout << creditsObj;
+    std::cout << "\n\n\n\n\t\t\t\t\tPulindu\n\n\t\t\t\t\tEnuka\n\n\t\t\t\t\tKesara\n\n\t\t\t\t\tUshan";
     Sleep(2000);
 }
