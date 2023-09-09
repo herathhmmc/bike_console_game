@@ -22,6 +22,7 @@
 
 void setup();
 void menu();
+void newPlayer();
 void draw_lv();
 void draw_game();
 void input();
@@ -35,11 +36,10 @@ void credits();
 bool gameOver = true;
 bool quit = false;
 bool bikeCord = false;
-int mapX = 60, mapY = 30;
+int mapX = 60, mapY = 40;
 int bike_health = 100;
 int x, y;
 int enemyX, enemyY;
-int levelPass = 1;
 int wallSize = 3;
 int score = 0;
 std::string playerName;
@@ -144,6 +144,17 @@ std::string playerIdObj =
     "\t / ____/ / /_/ / /_/ /  __/ /     _/ // /_/ / \n"
     "\t/_/   /_/\\__,_/\\__, /\\___/_/     /___/_____/  \n"
     "\t              /____/                          \n";
+
+std::string asciiArt =
+    "\n\n\t\t              .-=========-.   \n"
+    "\t\t              \\'-=======-'/   \n"
+    "\t\t              _|   .=.   |_   \n"
+    "\t\t             ((|  {{1}}  |))  \n"
+    "\t\t              \\|   /|\\   |/   \n"
+    "\t\t               \\__ '`' __/    \n"
+    "\t\t                 _`) (`_      \n"
+    "\t\t               _/_______\\_    \n"
+    "\t\t              /___________\\   \n";
 
 // the-main-method
 
@@ -275,16 +286,7 @@ void menu()
 
     if (choise == 1)
     {
-        system("cls");
-        std::cin.ignore();
-        std::cout << playerIdObj;
-        std::cout << "\n\n\n\t\tPlease Enter Your Name : ";
-        getline(std::cin, playerName);
-        Sleep(1000);
-        if (playerName.empty())
-        {
-            playerName = "Unknown";
-        }
+        newPlayer();
         gameOver = false;
     }
     else if (choise == 3)
@@ -307,6 +309,7 @@ void menu()
         }
         else if (choise == 2)
         {
+            newPlayer();
             quit = false;
             gameOver = false;
         }
@@ -315,6 +318,20 @@ void menu()
             std::cout << "Invalid Input : Default Opstion is choosen quit.";
             quit = true;
         }
+    }
+}
+
+void newPlayer()
+{
+    system("cls");
+    std::cin.ignore();
+    std::cout << playerIdObj;
+    std::cout << "\n\n\n\t\tPlease Enter Your Name : ";
+    getline(std::cin, playerName);
+    Sleep(500);
+    if (playerName.empty())
+    {
+        playerName = "Unknown";
     }
 }
 
@@ -332,8 +349,8 @@ void draw_game()
         std::cout << "\n\n\t\t\t\t\tYour Score : " << score;
         Sleep(2000);
     }
-    std::cout << "\n\n\t\t\tYour Score : " << score;
-    std::cout << "\n\t\t\tYour PlayerID : " << playerName;
+    std::cout << "\n\n\t\tYour Score : " << score;
+    std::cout << "\n\t\tYour PlayerID : " << playerName;
 }
 
 bool isGameOver(int enemyX, int enemyY, int x, int y)
@@ -395,7 +412,8 @@ void input()
 {
     if (_kbhit())
     {
-        switch (_getch())
+        char key = _getch(); // Get the key that was pressed
+        switch (key)
         {
         case 'a':
             dir = LEFT;
@@ -414,7 +432,18 @@ void input()
             quit = true;
             break;
         }
+
+        // Clear the input buffer
+        while (_kbhit())
+        {
+            key =_getch();
+        }
+
     }
+    else{
+        dir = STOP;
+    }
+
 }
 
 void logic()
@@ -422,16 +451,16 @@ void logic()
     switch (dir)
     {
     case LEFT:
-        x = x - 3;
+        x -= 3;
         break;
     case RIGHT:
-        x = x + 3;
+        x += 3;
         break;
     case UP:
-        y--;
+        y -= 2;
         break;
     case DOWN:
-        y++;
+        y += 2;
         break;
     }
 
@@ -602,7 +631,11 @@ bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY)
 void credits()
 {
     system("cls");
+    std::cout << "\n\n\t" << playerName << "You got highest score for our little game.";
+    std::cout << asciiArt;
+    Sleep(1500);
+    system("cls");
     std::cout << creditsObj;
-    std::cout << "\n\n\n\n\t\t\t\t\tPulindu\n\n\t\t\t\t\tEnuka\n\n\t\t\t\t\tKesara\n\n\t\t\t\t\tUshan";
+    std::cout << "\n\n\n\n\t\t\t\tPulindu\n\n\t\t\t\tEnuka\n\n\t\t\t\tKesara\n\n\t\t\t\tUshan";
     Sleep(2000);
 }
