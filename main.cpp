@@ -22,11 +22,10 @@
 
 void setup();
 void menu();
-void checkLevelPass(int value);
+int checkLevelPass(int value, int level);
 void draw_lv1();
-// void draw_lv2();
-// void draw_lv3();
-// void draw_lv4();
+void draw_lv2();
+void draw_lv3();
 void input();
 void logic();
 bool draw_bike(int draw_x, int draw_y, int currentX, int currentY);
@@ -86,6 +85,29 @@ std::string overIcon =
     "    Y88b  d88P 888  888 888  888  888 Y8b.            Y88b. .d88P  Y8bd8P  Y8b.     888\n"
     "     \"Y8888P88 \"Y888888 888  888  888  \"Y8888          \"Y88888P\"    Y88P    \"Y8888  888\n";
 
+std::string lv_1 =
+    "\n\n\n\t\tdb      d88888b db    db d88888b db                        db\n"
+    "\t\t88      88'     88    88 88'     88                       o88\n"
+    "\t\t88      88ooooo Y8    8P 88ooooo 88                        88\n"
+    "\t\t88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       88\n"
+    "\t\t88booo. 88.      `8bd8'  88.     88booo.                   88\n"
+    "\t\tY88888P Y88888P    YP    Y88888P Y88888P                   VP\n";
+
+std::string lv_2 =
+    "\n\n\n\t\tdb      d88888b db    db d88888b db                       .d888b.\n"
+    "\t\t88      88'     88    88 88'     88                       VP  `8D\n"
+    "\t\t88      88ooooo Y8    8P 88ooooo 88                          odD'\n"
+    "\t\t88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       .88'\n"
+    "\t\t88booo. 88.      `8bd8'  88.     88booo.                  j88.\n"
+    "\t\tY88888P Y88888P    YP    Y88888P Y88888P                  888888D\n";
+
+std::string lv_3 =
+    "\n\n\n\t\tdb      d88888b db    db d88888b db                       d8888b.\n"
+    "\t\t88      88'     88    88 88'     88                       VP  `8D\n"
+    "\t\t88      88ooooo Y8    8P 88ooooo 88                         oooY'\n"
+    "\t\t88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D        ~~~b.\n"
+    "\t\t88booo. 88.      `8bd8'  88.     88booo.                  db   8D\n"
+    "\t\tY88888P Y88888P    YP    Y88888P Y88888P                  Y8888P'\n";
 
 // the-main-method
 
@@ -97,21 +119,93 @@ int main()
         setup();
         while (gameOver && !quit)
         {
+            score = 0;
             menu();
         }
-        while (!gameOver)
+        if (score >= 0 && score<=100 && !gameOver)
         {
-            gameOver = isGameOver(enemyX, enemyY, x, y);
-            draw_lv1();
-            input();
-            logic();
-            Sleep(10);
-            if(gameOver){
-                system("cls");
-                std::cout<<"\n\n\n"<<overIcon;
-                std::cout<<"\n\n\t\t\t\t\tYour Score : "<<score;
-                Sleep(2000);
+            system("cls");
+            std::cout<<lv_1;
+            Sleep(1500);
+            system("cls");
+            while (!gameOver)
+            {
+                gameOver = isGameOver(enemyX, enemyY, x, y);
+                draw_lv1();
+                input();
+                logic();
+                Sleep(10);
+                if(score>=100){
+                    break;
+                }
+                if (gameOver)
+                {
+                    system("cls");
+                    std::cout << "\n\n\n"
+                              << overIcon;
+                    std::cout << "\n\n\t\t\t\t\tYour Score : " << score;
+                    Sleep(2000);
+                }
             }
+        }
+        if (score >= 100 && score<=200 && !gameOver)
+        {
+            system("cls");
+            std::cout<<lv_2;
+            Sleep(1500);
+            system("cls");
+            wallSize += 3;
+            while (!gameOver)
+            {
+                gameOver = isGameOver(enemyX, enemyY, x, y);
+                draw_lv2();
+                input();
+                logic();
+                Sleep(10);
+                if(score >= 200){
+                    break;
+                }
+                if (gameOver)
+                {
+                    system("cls");
+                    std::cout << "\n\n\n"
+                              << overIcon;
+                    std::cout << "\n\n\t\t\t\t\tYour Score : " << score;
+                    Sleep(2000);
+                }
+            }
+        }
+        if (score >= 200 && score<=300 && !gameOver)
+        {
+            system("cls");
+            std::cout<<lv_3;
+            Sleep(1500);
+            system("cls");
+            wallSize += 3;
+            while (!gameOver)
+            {
+                gameOver = isGameOver(enemyX, enemyY, x, y);
+                draw_lv3();
+                input();
+                logic();
+                Sleep(10);
+                if(score>=300){
+                    break;
+                }
+                if (gameOver)
+                {
+                    system("cls");
+                    std::cout << "\n\n\n"
+                              << overIcon;
+                    std::cout << "\n\n\t\t\t\t\tYour Score : " << score;
+                    Sleep(2000);
+                }
+            }
+        }
+        if (score >= 300 && !gameOver)
+        {
+            credits();
+            gameOver = true;
         }
     }
 
@@ -169,7 +263,6 @@ void menu()
         "    888   \"   888 Y88..88P Y88b. Y88..88P        Y88b  d88P 888\n"
         "    888       888  \"Y88P\"   \"Y888 \"Y88P\"          \"Y8888P88 888\n";
 
-
     system("cls");
     std::cout << menuIcon;
     std::cout << std::endl;
@@ -223,44 +316,27 @@ bool isGameOver(int enemyX, int enemyY, int x, int y)
     return false;
 }
 
-void checkLevelPass(int value, int level)
+int checkLevelPass(int value, int level)
 {
-std::string lv_1 =
-    "db      d88888b db    db d88888b db                        db\n"
-    "88      88'     88    88 88'     88                       o88\n"
-    "88      88ooooo Y8    8P 88ooooo 88                        88\n"
-    "88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       88\n"
-    "88booo. 88.      `8bd8'  88.     88booo.                   88\n"
-    "Y88888P Y88888P    YP    Y88888P Y88888P                   VP\n";
-
-std::string lv_2 =
-    "db      d88888b db    db d88888b db                       .d888b.\n"
-    "88      88'     88    88 88'     88                       VP  `8D\n"
-    "88      88ooooo Y8    8P 88ooooo 88                          odD'\n"
-    "88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       .88'\n"
-    "88booo. 88.      `8bd8'  88.     88booo.                  j88.\n"
-    "Y88888P Y88888P    YP    Y88888P Y88888P                  888888D\n";
-
-std::string lv_3 =
-    "db      d88888b db    db d88888b db                       d8888b.\n"
-    "88      88'     88    88 88'     88                       VP  `8D\n"
-    "88      88ooooo Y8    8P 88ooooo 88                         oooY'\n"
-    "88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D        ~~~b.\n"
-    "88booo. 88.      `8bd8'  88.     88booo.                  db   8D\n"
-    "Y88888P Y88888P    YP    Y88888P Y88888P                  Y8888P'\n";
-
     if (value <= 100 && level == 1)
     {
         level++;
+        return level;
     }
-    if (value <= 200 && level == 2){
+    if (value <= 200 && level == 2)
+    {
         level++;
+        return level;
     }
-    if (value <= 300 && level == 3){
+    if (value <= 300 && level == 3)
+    {
         level++;
+        return level;
     }
-    if(level == 4){
-        credits();
+    if (level == 4)
+    {
+        level++;
+        return level;
     }
 }
 
@@ -308,6 +384,16 @@ void draw_lv1()
     std::cout << std::endl;
 }
 
+void draw_lv2()
+{
+    draw_lv1();
+}
+
+void draw_lv3()
+{
+    draw_lv1();
+}
+
 void input()
 {
     if (_kbhit())
@@ -339,10 +425,10 @@ void logic()
     switch (dir)
     {
     case LEFT:
-        x = x - 2;
+        x = x - 3;
         break;
     case RIGHT:
-        x = x + 2;
+        x = x + 3;
         break;
     case UP:
         y--;
@@ -353,9 +439,9 @@ void logic()
     }
 
     if (x >= mapX - (wallSize + 8))
-        x = wallSize;
+        gameOver = true;
     else if (x < wallSize)
-        x = (mapX - wallSize - 8);
+        gameOver = true;
     if (y >= mapY)
         y = 0;
     else if (y < 0)
@@ -364,7 +450,9 @@ void logic()
     enemyY = enemyY + 2;
     if (enemyY > mapY)
     {
-        enemyY = 0;
+        enemyX = wallSize + rand() % static_cast<int>(mapX - (wallSize + 8));
+        enemyY = 1;
+        score = score + 25;
     }
 }
 
@@ -514,6 +602,9 @@ bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY)
     return false;
 }
 
-void credits(){
-    std::cout<<"Ushan Ikshana";
+void credits()
+{
+    system("cls");
+    std::cout << "\n\n\n\n\t\t\tUshan Ikshana";
+    Sleep(2000);
 }
