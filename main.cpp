@@ -32,6 +32,7 @@ void logic();
 bool draw_bike(int draw_x, int draw_y, int currentX, int currentY);
 bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY);
 bool isGameOver(int enemyX, int enemyY, int x, int y);
+void credits();
 
 // init-Variables
 bool gameOver = true;
@@ -75,6 +76,17 @@ std::string bikeObj =
     "   =LIEF()ZIMMERMAN(((((()'    --(*)--\n"
     "      \"*oo*\"                   \"*ooo*\"\n";
 
+std::string overIcon = R"(
+     .d8888b.                                          .d88888b.
+    d88P  Y88b                                        d88P" "Y88b
+    888    888                                        888     888
+    888         8888b.  88888b.d88b.   .d88b.         888     888 888  888  .d88b.  888d888
+    888  88888     "88b 888 "888 "88b d8P  Y8b        888     888 888  888 d8P  Y8b 888P"
+    888    888 .d888888 888  888  888 88888888 888888 888     888 Y88  88P 88888888 888
+    Y88b  d88P 888  888 888  888  888 Y8b.            Y88b. .d88P  Y8bd8P  Y8b.     888
+     "Y8888P88 "Y888888 888  888  888  "Y8888          "Y88888P"    Y88P    "Y8888  888
+    )";
+
 // the-main-method
 
 int main()
@@ -94,6 +106,12 @@ int main()
             input();
             logic();
             Sleep(16);
+            if(gameOver){
+                system("cls");
+                std::cout<<"\n\n\n"<<overIcon;
+                std::cout<<"\n\n\t\t\t\t\tYour Score : "<<score;
+                Sleep(2000);
+            }
         }
     }
 
@@ -103,6 +121,8 @@ int main()
         std::cout << "\n\n\t\t##########################################\n\n\t\tProudly Presented by Programming Group 16.\n\n\t\t##########################################\n\n\n\n";
         std::cout << "\n\n"
                   << bikeObj << "\n\n";
+        Sleep(1500);
+        system("exit");
     }
 
     return 0;
@@ -150,24 +170,13 @@ void menu()
     888       888  "Y88P"   "Y888 "Y88P"          "Y8888P88 888
     )";
 
-    std::string overIcon = R"(
-     .d8888b.                                          .d88888b.
-    d88P  Y88b                                        d88P" "Y88b
-    888    888                                        888     888
-    888         8888b.  88888b.d88b.   .d88b.         888     888 888  888  .d88b.  888d888
-    888  88888     "88b 888 "888 "88b d8P  Y8b        888     888 888  888 d8P  Y8b 888P"
-    888    888 .d888888 888  888  888 88888888 888888 888     888 Y88  88P 88888888 888
-    Y88b  d88P 888  888 888  888  888 Y8b.            Y88b. .d88P  Y8bd8P  Y8b.     888
-     "Y8888P88 "Y888888 888  888  888  "Y8888          "Y88888P"    Y88P    "Y8888  888
-    )";
-
     system("cls");
     std::cout << "\t" << menuIcon;
     std::cout << std::endl;
     std::cout << "\t\t\t Sri-Lankan-Version" << std::endl;
     std::cout << std::endl;
     int choise;
-    std::cout << "1. New Game \n2. Instructions \n3.Quit \n\n";
+    std::cout << "\t\t1. New Game \n\t\t2. Instructions \n\t\t3.Quit \n\n\t>>";
     std::cin >> choise;
 
     if (choise == 1)
@@ -246,15 +255,15 @@ void checkLevelPass(int value, int level)
     if (value <= 100 && level == 1)
     {
         level++;
-        value = 0;
     }
-    if (value <= 100 && level == 2){
+    if (value <= 200 && level == 2){
         level++;
-        value = 0;
     }
-    if (value <= 100 && level == 3){
+    if (value <= 300 && level == 3){
         level++;
-        value = 0;
+    }
+    if(level == 4){
+        credits();
     }
 }
 
@@ -506,4 +515,8 @@ bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY)
         return false;
     }
     return false;
+}
+
+void credits(){
+    std::cout<<"Ushan Ikshana";
 }
