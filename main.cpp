@@ -76,16 +76,16 @@ std::string bikeObj =
     "   =LIEF()ZIMMERMAN(((((()'    --(*)--\n"
     "      \"*oo*\"                   \"*ooo*\"\n";
 
-std::string overIcon = R"(
-     .d8888b.                                          .d88888b.
-    d88P  Y88b                                        d88P" "Y88b
-    888    888                                        888     888
-    888         8888b.  88888b.d88b.   .d88b.         888     888 888  888  .d88b.  888d888
-    888  88888     "88b 888 "888 "88b d8P  Y8b        888     888 888  888 d8P  Y8b 888P"
-    888    888 .d888888 888  888  888 88888888 888888 888     888 Y88  88P 88888888 888
-    Y88b  d88P 888  888 888  888  888 Y8b.            Y88b. .d88P  Y8bd8P  Y8b.     888
-     "Y8888P88 "Y888888 888  888  888  "Y8888          "Y88888P"    Y88P    "Y8888  888
-    )";
+std::string overIcon =
+    "     .d8888b.                                          .d88888b.\n"
+    "    d88P  Y88b                                        d88P\" \"Y88b\n"
+    "    888    888                                        888     888\n"
+    "    888         8888b.  88888b.d88b.   .d88b.         888     888 888  888  .d88b.  888d888\n"
+    "    888  88888     \"88b 888 \"888 \"88b d8P  Y8b        888     888 888  888 d8P  Y8b 888P\"\n"
+    "    888    888 .d888888 888  888  888 88888888 888888 888     888 Y88  88P 88888888 888\n"
+    "    Y88b  d88P 888  888 888  888  888 Y8b.            Y88b. .d88P  Y8bd8P  Y8b.     888\n"
+    "     \"Y8888P88 \"Y888888 888  888  888  \"Y8888          \"Y88888P\"    Y88P    \"Y8888  888\n";
+
 
 // the-main-method
 
@@ -159,19 +159,19 @@ void menu()
         - main-menu-of-the-game
     */
 
-    std::string menuIcon = R"(
-    888b     d888          888                    .d8888b.  8888888b.
-    8888b   d8888          888                   d88P  Y88b 888   Y88b
-    88888b.d88888          888                   888    888 888    888
-    888Y88888P888  .d88b.  888888 .d88b.         888        888   d88P
-    888 Y888P 888 d88""88b 888   d88""88b        888  88888 8888888P"
-    888  Y8P  888 888  888 888   888  888 888888 888    888 888
-    888   "   888 Y88..88P Y88b. Y88..88P        Y88b  d88P 888
-    888       888  "Y88P"   "Y888 "Y88P"          "Y8888P88 888
-    )";
+    std::string menuIcon =
+        "    888b     d888          888                    .d8888b.  8888888b.\n"
+        "    8888b   d8888          888                   d88P  Y88b 888   Y88b\n"
+        "    88888b.d88888          888                   888    888 888    888\n"
+        "    888Y88888P888  .d88b.  888888 .d88b.         888        888   d88P\n"
+        "    888 Y888P 888 d88\"\"88b 888   d88\"\"88b        888  88888 8888888P\"\n"
+        "    888  Y8P  888 888  888 888   888  888 888888 888    888 888\n"
+        "    888   \"   888 Y88..88P Y88b. Y88..88P        Y88b  d88P 888\n"
+        "    888       888  \"Y88P\"   \"Y888 \"Y88P\"          \"Y8888P88 888\n";
+
 
     system("cls");
-    std::cout << "\t" << menuIcon;
+    std::cout << menuIcon;
     std::cout << std::endl;
     std::cout << "\t\t\t Sri-Lankan-Version" << std::endl;
     std::cout << std::endl;
@@ -225,32 +225,29 @@ bool isGameOver(int enemyX, int enemyY, int x, int y)
 
 void checkLevelPass(int value, int level)
 {
-    std::string lv_1 = R"(
-    db      d88888b db    db d88888b db                        db
-    88      88'     88    88 88'     88                       o88
-    88      88ooooo Y8    8P 88ooooo 88                        88
-    88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       88
-    88booo. 88.      `8bd8'  88.     88booo.                   88
-    Y88888P Y88888P    YP    Y88888P Y88888P                   VP
-    )";
+std::string lv_1 =
+    "db      d88888b db    db d88888b db                        db\n"
+    "88      88'     88    88 88'     88                       o88\n"
+    "88      88ooooo Y8    8P 88ooooo 88                        88\n"
+    "88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       88\n"
+    "88booo. 88.      `8bd8'  88.     88booo.                   88\n"
+    "Y88888P Y88888P    YP    Y88888P Y88888P                   VP\n";
 
-    std::string lv_2 = R"(
-    db      d88888b db    db d88888b db                       .d888b.
-    88      88'     88    88 88'     88                       VP  `8D
-    88      88ooooo Y8    8P 88ooooo 88                          odD'
-    88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       .88'
-    88booo. 88.      `8bd8'  88.     88booo.                  j88.
-    Y88888P Y88888P    YP    Y88888P Y88888P                  888888D
-    )";
+std::string lv_2 =
+    "db      d88888b db    db d88888b db                       .d888b.\n"
+    "88      88'     88    88 88'     88                       VP  `8D\n"
+    "88      88ooooo Y8    8P 88ooooo 88                          odD'\n"
+    "88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       .88'\n"
+    "88booo. 88.      `8bd8'  88.     88booo.                  j88.\n"
+    "Y88888P Y88888P    YP    Y88888P Y88888P                  888888D\n";
 
-    std::string lv_3 = R"(
-    db      d88888b db    db d88888b db                       d8888b.
-    88      88'     88    88 88'     88                       VP  `8D
-    88      88ooooo Y8    8P 88ooooo 88                         oooY'
-    88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D        ~~~b.
-    88booo. 88.      `8bd8'  88.     88booo.                  db   8D
-    Y88888P Y88888P    YP    Y88888P Y88888P                  Y8888P'
-    )";
+std::string lv_3 =
+    "db      d88888b db    db d88888b db                       d8888b.\n"
+    "88      88'     88    88 88'     88                       VP  `8D\n"
+    "88      88ooooo Y8    8P 88ooooo 88                         oooY'\n"
+    "88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D        ~~~b.\n"
+    "88booo. 88.      `8bd8'  88.     88booo.                  db   8D\n"
+    "Y88888P Y88888P    YP    Y88888P Y88888P                  Y8888P'\n";
 
     if (value <= 100 && level == 1)
     {
