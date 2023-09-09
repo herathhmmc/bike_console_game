@@ -9,8 +9,6 @@
 //
 //                    The-Bike-Game
 
-
-
 // include-additional libraries
 
 #include <iostream>
@@ -24,6 +22,7 @@
 
 void setup();
 void menu();
+void checkLevelPass(int value);
 void draw_lv1();
 // void draw_lv2();
 // void draw_lv3();
@@ -33,7 +32,6 @@ void logic();
 bool draw_bike(int draw_x, int draw_y, int currentX, int currentY);
 bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY);
 bool isGameOver(int enemyX, int enemyY, int x, int y);
-
 
 // init-Variables
 bool gameOver = true;
@@ -91,10 +89,10 @@ int main()
         }
         while (!gameOver)
         {
+            gameOver = isGameOver(enemyX, enemyY, x, y);
             draw_lv1();
             input();
             logic();
-            gameOver = isGameOver(enemyX,enemyY,x,y);
             Sleep(16);
         }
     }
@@ -129,7 +127,7 @@ void setup()
     x = mapX / 2;
     y = mapY / 2;
 
-    enemyX = wallSize + rand() % static_cast<int>(mapX - (2 * wallSize));
+    enemyX = wallSize + rand() % static_cast<int>(mapX - ((2 * wallSize) + 2));
     enemyY = 3;
 }
 
@@ -141,25 +139,32 @@ void menu()
         - main-menu-of-the-game
     */
 
-    std::string menuIcon =
-        "\n\n\n  d8888b.  .d88b.  db    db d8b   db  .o88b. d88888b \n"
-        "  88  `8D .8P  Y8. 88    88 888o  88 d8P  Y8 88'     \n"
-        "  88oooY' 88    88 88    88 88V8o 88 8P      88ooooo \n"
-        "  88~~~b. 88    88 88    88 88 V8o88 8b      88~~~~~ \n"
-        "  88   8D `8b  d8' 88b  d88 88  V888 Y8b  d8 88.     \n"
-        "  Y8888P'  `Y88P'   Y8888P' VP   V8P  `Y88P' Y88888P \n"
-        "                                                     \n"
-        "                    The-bike-game                  \n";
+    std::string menuIcon = R"(
+    888b     d888          888                    .d8888b.  8888888b.
+    8888b   d8888          888                   d88P  Y88b 888   Y88b
+    88888b.d88888          888                   888    888 888    888
+    888Y88888P888  .d88b.  888888 .d88b.         888        888   d88P
+    888 Y888P 888 d88""88b 888   d88""88b        888  88888 8888888P"
+    888  Y8P  888 888  888 888   888  888 888888 888    888 888
+    888   "   888 Y88..88P Y88b. Y88..88P        Y88b  d88P 888
+    888       888  "Y88P"   "Y888 "Y88P"          "Y8888P88 888
+    )";
 
-    std::string overIcon =
-        "  dP\"\"b8    db    8b    d8 888888      dP\"Yb  Yb    dP 888888 88\"\"Yb \n"
-        " dP   `\"   dPYb   88b  d88 88__       dP   Yb  Yb  dP  88__   88__dP \n"
-        " Yb  \"88  dP__Yb  88YbdP88 88\"\"       Yb   dP   YbdP   88\"\"   88\"Yb  \n"
-        "  YboodP dP\"\"\"\"Yb 88 YY 88 888888      YbodP     YP    888888 88  Yb \n";
+    std::string overIcon = R"(
+     .d8888b.                                          .d88888b.
+    d88P  Y88b                                        d88P" "Y88b
+    888    888                                        888     888
+    888         8888b.  88888b.d88b.   .d88b.         888     888 888  888  .d88b.  888d888
+    888  88888     "88b 888 "888 "88b d8P  Y8b        888     888 888  888 d8P  Y8b 888P"
+    888    888 .d888888 888  888  888 88888888 888888 888     888 Y88  88P 88888888 888
+    Y88b  d88P 888  888 888  888  888 Y8b.            Y88b. .d88P  Y8bd8P  Y8b.     888
+     "Y8888P88 "Y888888 888  888  888  "Y8888          "Y88888P"    Y88P    "Y8888  888
+    )";
 
     system("cls");
-    std::cout << menuIcon;
+    std::cout << "\t" << menuIcon;
     std::cout << std::endl;
+    std::cout << "\t\t\t Sri-Lankan-Version" << std::endl;
     std::cout << std::endl;
     int choise;
     std::cout << "1. New Game \n2. Instructions \n3.Quit \n\n";
@@ -200,11 +205,57 @@ void menu()
 
 bool isGameOver(int enemyX, int enemyY, int x, int y)
 {
-    if (enemyY + 4 == y && enemyX + 7 >= x)
+    bool condition1 = (enemyX <= x && enemyX + 7 >= x) && (enemyY <= y && enemyY + 4 >= y);
+    bool condition2 = (enemyX <= x + 7 && enemyX + 7 >= x + 7) && (enemyY <= y && enemyY + 4 >= y);
+    if (condition1 || condition2)
     {
         return true;
     }
     return false;
+}
+
+void checkLevelPass(int value, int level)
+{
+    std::string lv_1 = R"(
+    db      d88888b db    db d88888b db                        db
+    88      88'     88    88 88'     88                       o88
+    88      88ooooo Y8    8P 88ooooo 88                        88
+    88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       88
+    88booo. 88.      `8bd8'  88.     88booo.                   88
+    Y88888P Y88888P    YP    Y88888P Y88888P                   VP
+    )";
+
+    std::string lv_2 = R"(
+    db      d88888b db    db d88888b db                       .d888b.
+    88      88'     88    88 88'     88                       VP  `8D
+    88      88ooooo Y8    8P 88ooooo 88                          odD'
+    88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D       .88'
+    88booo. 88.      `8bd8'  88.     88booo.                  j88.
+    Y88888P Y88888P    YP    Y88888P Y88888P                  888888D
+    )";
+
+    std::string lv_3 = R"(
+    db      d88888b db    db d88888b db                       d8888b.
+    88      88'     88    88 88'     88                       VP  `8D
+    88      88ooooo Y8    8P 88ooooo 88                         oooY'
+    88      88~~~~~ `8b  d8' 88~~~~~ 88           C8888D        ~~~b.
+    88booo. 88.      `8bd8'  88.     88booo.                  db   8D
+    Y88888P Y88888P    YP    Y88888P Y88888P                  Y8888P'
+    )";
+
+    if (value <= 100 && level == 1)
+    {
+        level++;
+        value = 0;
+    }
+    if (value <= 100 && level == 2){
+        level++;
+        value = 0;
+    }
+    if (value <= 100 && level == 3){
+        level++;
+        value = 0;
+    }
 }
 
 void draw_lv1()
@@ -219,23 +270,6 @@ void draw_lv1()
     // draw-middle-part
     for (int i = 0; i < mapY; i++)
     {
-        // for (int j = 0; j <= mapX; j++)
-        // {
-        //     if (j == 0)
-        //     {
-        //         std::cout << "#";
-        //     }
-        //     if (j == mapX)
-        //     {
-        //         std::cout << "#";
-        //     }
-        //     else
-        //     {
-        //         std::cout << " ";
-        //     }
-        // }
-        // std::cout << std::endl;
-
         for (int j = 0; j < mapX; j++)
         {
             if (j < wallSize)
