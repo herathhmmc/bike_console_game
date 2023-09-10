@@ -1,81 +1,49 @@
-# The Bike Game
+# The Bike Game 🚴‍♂️
 
-This is a simple text-based game implemented in C++. The game allows players to control a bike and navigate through a maze, avoiding obstacles and walls. Below, we provide an overview of the code and its functionality.
+The Bike Game is a simple console-based game written in C++. It's a fun and addictive game where you control a bike and try to avoid obstacles while collecting points.
 
-## Table of Contents
+## Contributors 🤝
 
-- [Introduction](#introduction)
-- [Gameplay](#gameplay)
-- [Code Overview](#code-overview)
-- [How to Play](#how-to-play)
-- [Installation](#installation)
-- [Contributions](#contributions)
-- [License](#license)
+- [Ushan Ikshana](https://github.com/im-ushan-ikshana) - Main Developer
+- [Kesara Kulathunga](https://github.com/kesarakulathunga) - Contributor
+- [Pulindu Wimalaweera](https://github.com/psw101) - Contributor
 
-## Introduction
+## Code Explanation 💻
 
-The Bike Game is a console-based game where the player controls a bike avatar and must navigate through a maze. The objective is to reach the end of the maze while avoiding collisions with walls and obstacles. The game features multiple levels, but only the first level is implemented in this code sample.
+This game is developed in C++ and uses the following libraries:
 
-## Gameplay
+- `iostream`: The `iostream` library is used for basic input and output operations. It allows the game to display messages and information on the console.
 
-In the game, the player can control the bike using the following keys:
+- `conio.h`: The `conio.h` library is used for reading keyboard inputs. It enables the game to respond to key presses and control the bike's movements based on user input.
 
-- W: Move the bike up.
-- S: Move the bike down.
-- A: Move the bike left.
-- D: Move the bike right.
-- X: Force stop and quit the game.
+- `windows.h`: The `windows.h` library is used for console manipulation functions. It helps clear the console screen and provides control over console display.
 
-The player's goal is to guide the bike through the maze and avoid crashing into walls. As the bike moves, the player can also jump and move in different directions to navigate the maze successfully. The game includes a menu where players can start a new game, access instructions, or quit.
+- `cstdlib`: The `cstdlib` library is used for random number generation. It's used to randomize the position of obstacles and enemies in the game.
 
-## Code Overview
+- `string` and `cstring`: The `string` and `cstring` libraries are used for string manipulation. They are used to manage player names and display text-based game elements.
 
-The code consists of several key components:
+The game includes the following key functions:
 
-- Initialization: The game initializes various variables, including the game state, player position, and level settings.
+- `setup()`: Initializes game variables, including the player's health, position, and score.
 
-- Menu: The `menu()` function displays the main menu and handles player choices to start a new game or access instructions.
+- `menu()`: Displays the main menu of the game and allows the player to start a new game or quit.
 
-- Level Drawing: The `draw_lv1()` function draws the game level, including the maze walls and the player's bike. Only the first level is implemented in this code.
+- `newPlayer()`: Prompts the player to enter their name and sets a default name if none is provided.
 
-- Input: The `input()` function handles player input, allowing them to control the bike.
+- `draw_game()`: Handles the main game loop, including drawing the game screen, taking player input, and updating the game state.
 
-- Logic: The `logic()` function processes the game's logic, including updating the bike's position and checking for collisions.
+- `isGameOver()`: Checks if the game is over by comparing the positions of the player and the enemy.
 
-- Bike Drawing: The `draw_bike()` function is responsible for drawing the bike avatar on the screen based on its current position.
+- `draw_lv()`: Draws the game's levels, including walls, the player's bike, and enemies.
 
-## How to Play
+- `input()`: Handles keyboard input for controlling the bike.
 
-1. Compile and run the C++ code provided in your development environment.
+- `logic()`: Implements the game's logic, including player movement and enemy spawning.
 
-2. Use the following keys to control the bike:
-   - W: Move up
-   - S: Move down
-   - A: Move left
-   - D: Move right
-   - X: Quit the game
+- `draw_bike()` and `draw_enemy()`: Functions to draw the player's bike and enemies on the game screen.
 
-3. Navigate the bike through the maze while avoiding collisions with walls.
+- `credits()`: Displays a credits screen when the player achieves a high score.
 
-4. Try to reach the end of the maze to complete the level.
+## License 📜
 
-5. You can access the main menu by pressing a key when prompted, allowing you to start a new game, access instructions, or quit the game.
-
-## Installation
-
-To run the code, you will need a C++ development environment. Follow these steps:
-
-1. Clone the repository or download the source code.
-
-2. Compile the code using a C++ compiler, such as g++:
-
-3. Run the compiled executable:
-
-
-## Contributions
-
-Contributions to this project are welcome. Feel free to open issues, suggest improvements, or submit pull requests.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the GNU General Public License (GPL). See the [LICENSE](LICENSE) file for details.
