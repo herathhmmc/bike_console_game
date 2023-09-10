@@ -5,7 +5,7 @@
  *      | |\  /| | / .'`\ \| | / .'`\ \|______|| |   ____  |  ___/  
  *     _| |_\/_| |_| \__. || |,| \__. |        \ `.___]  |_| |_     
  *    |_____||_____|'.__.' \__/ '.__.'          `._____.'|_____|    
- *                                                                  
+ *                       the-bike-game(text-based)                                       
  */
 
 
@@ -17,8 +17,9 @@
 #include <string>
 #include <cstring>
 
-// init-other-functions
 
+
+// init-functions
 void setup();
 void menu();
 void newPlayer();
@@ -30,6 +31,8 @@ bool draw_bike(int draw_x, int draw_y, int currentX, int currentY);
 bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY);
 bool isGameOver(int enemyX, int enemyY, int x, int y);
 void credits();
+
+
 
 // init-Variables
 bool gameOver = true;
@@ -54,14 +57,9 @@ eDirect dir;
 int spawnX = 5;
 int spawnY = mapY / 2;
 
-// Game-objects-enemies-and-traps;
-std::string ballObj = "@";
-std::string spidObj =
-    "  / _ \\\n"
-    "\\_\\(_)/_/\n"
-    " _//\"\\\\_ \n"
-    "  /   \\  \n";
 
+
+// Game-objects
 std::string trapObj = "/\\";
 
 std::string bikeObj =
@@ -155,8 +153,10 @@ std::string asciiArt =
     "\t\t               _/_______\\_    \n"
     "\t\t              /___________\\   \n";
 
-// the-main-method
 
+
+
+// the-main-method
 int main()
 {
 
@@ -243,8 +243,13 @@ int main()
     return 0;
 }
 
-// functions
 
+
+
+
+
+
+// functions
 void setup()
 {
     /*
