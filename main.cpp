@@ -1,17 +1,15 @@
+/***
+ *     ____    ____         _                     ______  _______   
+ *    |_   \  /   _|       / |_                 .' ___  ||_   __ \  
+ *      |   \/   |   .--. `| |-' .--.   ______ / .'   \_|  | |__) | 
+ *      | |\  /| | / .'`\ \| | / .'`\ \|______|| |   ____  |  ___/  
+ *     _| |_\/_| |_| \__. || |,| \__. |        \ `.___]  |_| |_     
+ *    |_____||_____|'.__.' \__/ '.__.'          `._____.'|_____|    
+ *                                                                  
+ */
 
 
-//  d8888b.  .d88b.  db    db d8b   db  .o88b. d88888b
-//  88  `8D .8P  Y8. 88    88 888o  88 d8P  Y8 88'
-//  88oooY' 88    88 88    88 88V8o 88 8P      88ooooo
-//  88~~~b. 88    88 88    88 88 V8o88 8b      88~~~~~
-//  88   8D `8b  d8' 88b  d88 88  V888 Y8b  d8 88.
-//  Y8888P'  `Y88P'  ~Y8888P' VP   V8P  `Y88P' Y88888P
-//
-//                    The-Bike-Game
-
-// include-additional libraries
-
-
+//include libraries
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
@@ -37,7 +35,7 @@ void credits();
 bool gameOver = true;
 bool quit = false;
 bool bikeCord = false;
-int mapX = 60, mapY = 40;
+int mapX = 50, mapY = 30;
 int bike_health = 100;
 int x, y;
 int enemyX, enemyY;
@@ -129,7 +127,7 @@ std::string InstrObj =
     "\t                                                   |___/ \n";
 
 std::string menuIcon =
-    "    888b     d888          888                    .d8888b.  8888888b.\n"
+    "\n\n    888b     d888          888                    .d8888b.  8888888b.\n"
     "    8888b   d8888          888                   d88P  Y88b 888   Y88b\n"
     "    88888b.d88888          888                   888    888 888    888\n"
     "    888Y88888P888  .d88b.  888888 .d88b.         888        888   d88P\n"
@@ -341,7 +339,7 @@ void draw_game()
     gameOver = isGameOver(enemyX, enemyY, x, y);
     input();
     logic();
-    Sleep(10);
+    Sleep(20);
     if (gameOver)
     {
         system("cls");
@@ -474,7 +472,7 @@ void logic()
     else if (y < 0)
         y = mapY - 1;
 
-    enemyY = enemyY + 2;
+    enemyY = enemyY + 1;
     if (enemyY > mapY)
     {
         enemyX = wallSize + rand() % static_cast<int>(mapX - (wallSize + 8));
