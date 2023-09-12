@@ -1,8 +1,8 @@
-# 🚴 The Bike Game - Text-Based Adventure 🚴
+# 🏍️ Moto-GP - Text-Based Adventure 🏍️
 
 ![Game Screenshot](screenshot.png)
 
-Welcome to **The Bike Game**, a fun and challenging text-based adventure created by a team of talented developers. Join us on this thrilling journey as we ride through the world of coding and creativity!
+Welcome to **Moto-GP**, a thrilling text-based adventure created by a team of talented developers. Join us on this exciting journey as we race through the world of coding and creativity!
 
 ## 🌟 Meet the Team 🌟
 
@@ -24,14 +24,14 @@ Meet the brilliant minds behind this project:
 
 ## 🎮 Game Introduction 🎮
 
-**The Bike Game** is an exciting text-based adventure where you control a bike on a challenging journey through various levels. The objective is to avoid obstacles and collect points as you advance through the game. Be cautious not to collide with the enemy bike, or it's game over!
+**Moto-GP** is an exhilarating text-based adventure where you control a high-speed motorcycle on a thrilling journey through various levels. Your objective is to navigate obstacles and collect points as you progress through the game. Be careful not to collide with the enemy bike, or it's game over!
 
 ## 🏁 How to Play 🏁
 
-- **W**: Jump.
-- **S**: Instantly move down.
-- **A**: Go left.
-- **D**: Go right.
+- **W**: Accelerate and jump.
+- **S**: Perform an instant brake.
+- **A**: Move left.
+- **D**: Move right.
 - **X**: Force stop and quit the game.
 
 ## 🚀 Get Started 🚀
@@ -44,4 +44,4 @@ Meet the brilliant minds behind this project:
 
 This project is open source, and we encourage contributions and improvements from the community. Feel free to fork the repository, make enhancements, and submit pull requests to make the game even more awesome!
 
-🎉 Have fun playing **The Bike Game**! 🎉
+🎉 Have a blast playing **Moto-GP**! 🎉
