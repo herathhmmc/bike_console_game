@@ -141,7 +141,7 @@ std::string asciiArt =
     "\t\t               _/_______\\_    \n"
     "\t\t              /___________\\   \n";
 
-//use-namespace-as std
+// use-namespace-as std
 using namespace std;
 
 // main function
@@ -164,11 +164,11 @@ int main()
         }
         if (score >= 0 && score <= 100 && !gameOver)
         {
-            system("cls");     // clear the command line outputs
-            cout << lv_1; // print the ASCII-art
-            Sleep(1500);       // wait untill 1500 mili-seconds
-            system("cls");     // clear the command line outputs
-            while (!gameOver)  // loop untill gameOver becomes true
+            system("cls");    // clear the command line outputs
+            cout << lv_1;     // print the ASCII-art
+            Sleep(1500);      // wait untill 1500 mili-seconds
+            system("cls");    // clear the command line outputs
+            while (!gameOver) // loop untill gameOver becomes true
             {
 
                 draw_lv();        // draw map,bike and enemy
@@ -228,9 +228,9 @@ int main()
         system("cls"); // clear the command line ouputs
         cout << "\n\n\t\t##########################################\n\n\t\tProudly Presented by Programming Group 16.\n\n\t\t##########################################\n\n\n\n";
         cout << "\n\n"
-                  << bikeObj << "\n\n"; // print ASCII art
-        Sleep(1500);                    // wait 1500 miliseconds to execute next code
-        system("exit");                 // close the command line
+             << bikeObj << "\n\n"; // print ASCII art
+        Sleep(1500);               // wait 1500 miliseconds to execute next code
+        system("exit");            // close the command line
     }
     return 0;
 }
@@ -252,7 +252,7 @@ void setup()
 void menu()
 {
 
-    system("cls");         // clear the command line
+    system("cls");    // clear the command line
     cout << menuIcon; // print the ASCII-art
     cout << std::endl;
     cout << "\t\t\t Sri-Lankan-Version" << std::endl;
@@ -270,7 +270,7 @@ void menu()
         quit = true;
     else
     {
-        system("cls");         // clear the command line
+        system("cls");    // clear the command line
         cout << InstrObj; // print ascii art
         cout << "\n\n\t01. W - for Jump. \n";
         cout << "\t02. S - for Instant Down. \n";
@@ -301,13 +301,13 @@ void menu()
 // get users's name
 void newPlayer()
 {
-    system("cls");            // clear the command line
+    system("cls");       // clear the command line
     cin.ignore();        // clear the input buffer
     cout << playerIdObj; // print an ASCII art
     cout << "\n\n\n\t\tPlease Enter Your Name : ";
     getline(cin, playerName); // store users name inside the char
-    Sleep(500);                    // wait 500 mili-seconds to execute the code
-    if (playerName.empty())        // check the player name is empty or not
+    Sleep(500);               // wait 500 mili-seconds to execute the code
+    if (playerName.empty())   // check the player name is empty or not
     {
         playerName = "Unknown"; // if player name is empty it equals to 'Unkown'
     }
@@ -319,12 +319,12 @@ void build_game()
     gameOver = isGameOver(enemyX, enemyY, x, y); // check the enemy hit the bike
     input();                                     // get users input
     logic();                                     // check logics
-    Sleep(20);                                   // wait 20 mili-seconds to draw
+    Sleep(10);                                   // wait 10 mili-seconds to draw
     if (gameOver)
     {
-        system("cls");        // clear the command line
+        system("cls");   // clear the command line
         cout << "\n\n\n" // print the ASCII art
-                  << overIcon;
+             << overIcon;
         cout << "\n\n\t\t\t\t\tYour Score : " << score;
         Sleep(2000);
     }
@@ -379,13 +379,13 @@ void draw_lv()
                 cout << " ";
             }
         }
-        cout <<endl;
+        cout << endl;
     }
 
     // lower-map-frame
     for (int i = 0; i <= mapX; i++)
         cout << "#";
-    cout <<endl;
+    cout << endl;
 }
 
 void input()
@@ -455,13 +455,17 @@ void logic()
     enemyY = enemyY + 1; // moving thd enemy downward
     if (enemyY > mapY)
     {
-        enemyX = wallSize + rand() % static_cast<int>(mapX - (wallSize + 8)); // spawn enemy in random poisition
-        enemyY = 1;                                                           // set enemy enemyY cordinates to beginig of the map
-        score = score + 25;                                                   // when enemy passed the map users score wil increase
+        enemyX = wallSize + rand() % static_cast<int>(mapX - (2 * wallSize + 7)); // spawn enemy in random poisition
+        enemyY = 1;                                                               // set enemy enemyY cordinates to beginig of the map
+        score = score + 25;                                                       // when enemy passed the map users score wil increase
     }
 }
 
-bool draw_bike(int draw_x, int draw_y, int currentX, int currentY) // draw the bike - get x and y cordinates for bike and get current cusur position and output true when the bike can drawn
+bool draw_bike(int draw_x, int draw_y, int currentX, int currentY)
+/* draw the bike
+- get x and y cordinates for bike
+- and get current cusur position and output true when the bike can drawn
+*/
 {
     if (currentX <= (draw_x + 7) && currentY <= (draw_y + 4))
     {
@@ -534,7 +538,11 @@ bool draw_bike(int draw_x, int draw_y, int currentX, int currentY) // draw the b
     return false;
 }
 
-bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY) // draw the enemy - get x and y cordinates for bike and get current cusur position and output true when enemy can drawn
+bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY)
+/*draw the enemy
+- get x and y cordinates for enemy
+- and get current cusur position and output true when enemy can drawn
+*/
 {
     if (currentX <= (draw_x + 7) && currentY <= (draw_y + 4))
     {

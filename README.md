@@ -1,49 +1,47 @@
-# The Bike Game 🚴‍♂️
+# 🚴 The Bike Game - Text-Based Adventure 🚴
 
-The Bike Game is a simple console-based game written in C++. It's a fun and addictive game where you control a bike and try to avoid obstacles while collecting points.
+![Game Screenshot](screenshot.png)
 
-## Contributors 🤝
+Welcome to **The Bike Game**, a fun and challenging text-based adventure created by a team of talented developers. Join us on this thrilling journey as we ride through the world of coding and creativity!
 
-- [Ushan Ikshana](https://github.com/im-ushan-ikshana) - Main Developer
-- [Kesara Kulathunga](https://github.com/kesarakulathunga) - Contributor
-- [Pulindu Wimalaweera](https://github.com/psw101) - Contributor
+## 🌟 Meet the Team 🌟
 
-## Code Explanation 💻
+Meet the brilliant minds behind this project:
 
-This game is developed in C++ and uses the following libraries:
+- [Ushan Ikshana](https://github.com/im-ushan-ikshana) 🚀
+- [Pulindu](https://github.com/psw101) 🎮
+- [Enuka](https://github.com/chanuthenuka) 🛠️
+- [Kesara](https://github.com/kesarakulathunga) 🧩
 
-- `iostream`: The `iostream` library is used for basic input and output operations. It allows the game to display messages and information on the console.
+## 📚 Included Libraries and Functions 📚
 
-- `conio.h`: The `conio.h` library is used for reading keyboard inputs. It enables the game to respond to key presses and control the bike's movements based on user input.
+- `iostream`: Input and output handling.
+- `conio.h`: Console input/output functions (specific to Windows).
+- `windows.h`: Windows-specific functions for console manipulation.
+- `cstdlib`: Standard C library for various utility functions.
+- `string` and `cstring`: String manipulation and handling.
+- Custom-defined functions for game setup, menu display, player input, game logic, and more.
 
-- `windows.h`: The `windows.h` library is used for console manipulation functions. It helps clear the console screen and provides control over console display.
+## 🎮 Game Introduction 🎮
 
-- `cstdlib`: The `cstdlib` library is used for random number generation. It's used to randomize the position of obstacles and enemies in the game.
+**The Bike Game** is an exciting text-based adventure where you control a bike on a challenging journey through various levels. The objective is to avoid obstacles and collect points as you advance through the game. Be cautious not to collide with the enemy bike, or it's game over!
 
-- `string` and `cstring`: The `string` and `cstring` libraries are used for string manipulation. They are used to manage player names and display text-based game elements.
+## 🏁 How to Play 🏁
 
-The game includes the following key functions:
+- **W**: Jump.
+- **S**: Instantly move down.
+- **A**: Go left.
+- **D**: Go right.
+- **X**: Force stop and quit the game.
 
-- `setup()`: Initializes game variables, including the player's health, position, and score.
+## 🚀 Get Started 🚀
 
-- `menu()`: Displays the main menu of the game and allows the player to start a new game or quit.
+1. Clone this repository to your local machine.
+2. Compile and run the code using your C++ compiler.
+3. Follow the on-screen instructions to play the game.
 
-- `newPlayer()`: Prompts the player to enter their name and sets a default name if none is provided.
+## 🔓 Open Source 🛡️
 
-- `draw_game()`: Handles the main game loop, including drawing the game screen, taking player input, and updating the game state.
+This project is open source, and we encourage contributions and improvements from the community. Feel free to fork the repository, make enhancements, and submit pull requests to make the game even more awesome!
 
-- `isGameOver()`: Checks if the game is over by comparing the positions of the player and the enemy.
-
-- `draw_lv()`: Draws the game's levels, including walls, the player's bike, and enemies.
-
-- `input()`: Handles keyboard input for controlling the bike.
-
-- `logic()`: Implements the game's logic, including player movement and enemy spawning.
-
-- `draw_bike()` and `draw_enemy()`: Functions to draw the player's bike and enemies on the game screen.
-
-- `credits()`: Displays a credits screen when the player achieves a high score.
-
-## License 📜
-
-This project is licensed under the GNU General Public License (GPL). See the [LICENSE](LICENSE) file for details.
+🎉 Have fun playing **The Bike Game**! 🎉
