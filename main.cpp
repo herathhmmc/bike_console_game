@@ -1,15 +1,14 @@
 /***
- *     ____    ____         _                     ______  _______   
- *    |_   \  /   _|       / |_                 .' ___  ||_   __ \  
- *      |   \/   |   .--. `| |-' .--.   ______ / .'   \_|  | |__) | 
- *      | |\  /| | / .'`\ \| | / .'`\ \|______|| |   ____  |  ___/  
- *     _| |_\/_| |_| \__. || |,| \__. |        \ `.___]  |_| |_     
- *    |_____||_____|'.__.' \__/ '.__.'          `._____.'|_____|    
- *                       the-bike-game(text-based)                                       
+ *     ____    ____         _                     ______  _______
+ *    |_   \  /   _|       / |_                 .' ___  ||_   __ \
+ *      |   \/   |   .--. `| |-' .--.   ______ / .'   \_|  | |__) |
+ *      | |\  /| | / .'`\ \| | / .'`\ \|______|| |   ____  |  ___/
+ *     _| |_\/_| |_| \__. || |,| \__. |        \ `.___]  |_| |_
+ *    |_____||_____|'.__.' \__/ '.__.'          `._____.'|_____|
+ *                       the-bike-game(text-based)
  */
 
-
-//include libraries
+// include libraries
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
@@ -17,35 +16,30 @@
 #include <string>
 #include <cstring>
 
+// initialize-functions
+void setup();                                                        // setup bike variables (x,y)
+void menu();                                                         // print menu
+void newPlayer();                                                    // get user's name
+void draw_lv();                                                      // draw map , bike and enemy
+void build_game();                                                   // build the game
+void input();                                                        // get users inputs
+void logic();                                                        // logic parts of the game
+bool draw_bike(int draw_x, int draw_y, int currentX, int currentY);  // check possibility of drawing bike
+bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY); // check possibility of drawing enemy bike
+bool isGameOver(int enemyX, int enemyY, int x, int y);               // check enemy was hit by bike
+void credits();                                                      // show credits
 
-
-// init-functions
-void setup();
-void menu();
-void newPlayer();
-void draw_lv();
-void draw_game();
-void input();
-void logic();
-bool draw_bike(int draw_x, int draw_y, int currentX, int currentY);
-bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY);
-bool isGameOver(int enemyX, int enemyY, int x, int y);
-void credits();
-
-
-
-// init-Variables
+// initialize Variables
 bool gameOver = true;
 bool quit = false;
-bool bikeCord = false;
-int mapX = 50, mapY = 30;
-int bike_health = 100;
-int x, y;
-int enemyX, enemyY;
-int wallSize = 3;
-int score = 0;
-std::string playerName;
-enum eDirect
+int mapX = 50, mapY = 30; // map height and width
+int x, y;                 // bike cordinates
+int enemyX, enemyY;       // enemy bike cordinates
+int wallSize = 3;         // width of the wall
+int score = 0;            // player score
+std::string playerName;   // players-name
+
+enum eDirect // define directions
 {
     STOP = 0,
     LEFT,
@@ -54,14 +48,8 @@ enum eDirect
     DOWN
 };
 eDirect dir;
-int spawnX = 5;
-int spawnY = mapY / 2;
 
-
-
-// Game-objects
-std::string trapObj = "/\\";
-
+// ASCII-art Collection
 std::string bikeObj =
     "\t                      ;~\\.\n"
     "\t        .              _._\\\")\n"
@@ -153,34 +141,39 @@ std::string asciiArt =
     "\t\t               _/_______\\_    \n"
     "\t\t              /___________\\   \n";
 
+//use-namespace-as std
+using namespace std;
 
-
-
-// the-main-method
+// main function
 int main()
 {
+    /*
+    Main loop for game
 
-    while (!quit)
+    - loop until user gives command to quit
+
+    */
+    while (!quit) // loop untill quit
     {
-        setup();
+        setup(); // setup-bike and enemy
         while (gameOver && !quit)
         {
             score = 0;
             wallSize = 3;
-            menu();
+            menu(); // print-menu
         }
         if (score >= 0 && score <= 100 && !gameOver)
         {
-            system("cls");
-            std::cout << lv_1;
-            Sleep(1500);
-            system("cls");
-            while (!gameOver)
+            system("cls");     // clear the command line outputs
+            cout << lv_1; // print the ASCII-art
+            Sleep(1500);       // wait untill 1500 mili-seconds
+            system("cls");     // clear the command line outputs
+            while (!gameOver)  // loop untill gameOver becomes true
             {
 
-                draw_lv();
-                draw_game();
-                if (score >= 100)
+                draw_lv();        // draw map,bike and enemy
+                build_game();     // build the game (get user inputs , check logic)
+                if (score >= 100) // break the loop when score is more-than or equal to 100
                 {
                     break;
                 }
@@ -189,15 +182,15 @@ int main()
         if (score >= 100 && score <= 200 && !gameOver)
         {
             system("cls");
-            std::cout << lv_2;
+            cout << lv_2;
             Sleep(1500);
             system("cls");
-            wallSize += 3;
+            wallSize += 3; // increase wallSize by 3
             while (!gameOver)
             {
 
                 draw_lv();
-                draw_game();
+                build_game();
                 if (score >= 200)
                 {
                     break;
@@ -207,15 +200,15 @@ int main()
         if (score >= 200 && score <= 300 && !gameOver)
         {
             system("cls");
-            std::cout << lv_3;
+            cout << lv_3;
             Sleep(1500);
             system("cls");
-            wallSize += 3;
+            wallSize += 3; // increase wallSize by 3
             while (!gameOver)
             {
 
                 draw_lv();
-                draw_game();
+                build_game();
                 Sleep(10);
                 if (score >= 300)
                 {
@@ -225,199 +218,182 @@ int main()
         }
         if (score >= 300 && !gameOver)
         {
-            credits();
+            credits(); // show credits
             gameOver = true;
         }
     }
 
     if (quit)
     {
-        system("cls");
-        std::cout << "\n\n\t\t##########################################\n\n\t\tProudly Presented by Programming Group 16.\n\n\t\t##########################################\n\n\n\n";
-        std::cout << "\n\n"
-                  << bikeObj << "\n\n";
-        Sleep(1500);
-        system("exit");
+        system("cls"); // clear the command line ouputs
+        cout << "\n\n\t\t##########################################\n\n\t\tProudly Presented by Programming Group 16.\n\n\t\t##########################################\n\n\n\n";
+        cout << "\n\n"
+                  << bikeObj << "\n\n"; // print ASCII art
+        Sleep(1500);                    // wait 1500 miliseconds to execute next code
+        system("exit");                 // close the command line
     }
-
     return 0;
 }
 
-
-
-
-
-
-
 // functions
+
+// setup bike spawn cordinates and enemy spawn cordinates
 void setup()
 {
-    /*
-        @return void
-        - health
-        - postiton
-        - points
-        - stars (+2 points)
-        - animated-objects
-        - objects
-        - traps (-100 health)
-    */
 
-    int health = 100;
-    x = mapX / 2;
-    y = mapY / 2;
+    x = mapX / 2; // x is equal to half of the map width
+    y = mapY / 2; // y is equal to half of the map height
 
-    enemyX = wallSize + rand() % static_cast<int>(mapX - ((2 * wallSize) + 2));
-    enemyY = 3;
+    enemyX = wallSize + rand() % (mapX - ((2 * wallSize) + 7)); // get random x cordinate for the enemy
+    enemyY = 3;                                                 // set y cordinate foe the enemy
 }
 
+// print the Main-menu and get users inputs(New-Game )
 void menu()
 {
-    /*
-        @return void;
 
-        - main-menu-of-the-game
-    */
-
-    system("cls");
-    std::cout << menuIcon;
-    std::cout << std::endl;
-    std::cout << "\t\t\t Sri-Lankan-Version" << std::endl;
-    std::cout << std::endl;
+    system("cls");         // clear the command line
+    cout << menuIcon; // print the ASCII-art
+    cout << std::endl;
+    cout << "\t\t\t Sri-Lankan-Version" << std::endl;
+    cout << std::endl;
     int choise;
-    std::cout << "\t\t1. New Game \n\t\t2. Instructions \n\t\t3. Quit \n\n\t>>";
-    std::cin >> choise;
+    cout << "\t\t1. New Game \n\t\t2. Instructions \n\t\t3. Quit \n\n\t>>";
+    cin >> choise;
 
     if (choise == 1)
     {
-        newPlayer();
+        newPlayer(); // get user's name
         gameOver = false;
     }
     else if (choise == 3)
         quit = true;
     else
     {
-        system("cls");
-        std::cout << InstrObj;
-        std::cout << "\n\n\t01. W - for Jump. \n";
-        std::cout << "\t02. S - for Instant Down. \n";
-        std::cout << "\t03. A - for Going Left. \n";
-        std::cout << "\t04. D - for Going Right. \n";
-        std::cout << "\t05. X - for Force Stop and Quit Game; ";
+        system("cls");         // clear the command line
+        cout << InstrObj; // print ascii art
+        cout << "\n\n\t01. W - for Jump. \n";
+        cout << "\t02. S - for Instant Down. \n";
+        cout << "\t03. A - for Going Left. \n";
+        cout << "\t04. D - for Going Right. \n";
+        cout << "\t05. X - for Force Stop and Quit Game; ";
 
-        std::cout << "\n\nFor quit : 1 \nFor New Game : 2 \n\n  Answer : ";
-        std::cin >> choise;
+        cout << "\n\nFor quit : 1 \nFor New Game : 2 \n\n  Answer : ";
+        cin >> choise; // get user's input to choise
         if (choise == 1)
         {
             quit = true;
         }
         else if (choise == 2)
         {
-            newPlayer();
+            newPlayer(); // get user's name
             quit = false;
             gameOver = false;
         }
         else
         {
-            std::cout << "Invalid Input : Default Opstion is choosen quit.";
+            std::cout << "Invalid Input : Default Option is chosen quit.";
             quit = true;
         }
     }
 }
 
+// get users's name
 void newPlayer()
 {
-    system("cls");
-    std::cin.ignore();
-    std::cout << playerIdObj;
-    std::cout << "\n\n\n\t\tPlease Enter Your Name : ";
-    getline(std::cin, playerName);
-    Sleep(500);
-    if (playerName.empty())
+    system("cls");            // clear the command line
+    cin.ignore();        // clear the input buffer
+    cout << playerIdObj; // print an ASCII art
+    cout << "\n\n\n\t\tPlease Enter Your Name : ";
+    getline(cin, playerName); // store users name inside the char
+    Sleep(500);                    // wait 500 mili-seconds to execute the code
+    if (playerName.empty())        // check the player name is empty or not
     {
-        playerName = "Unknown";
+        playerName = "Unknown"; // if player name is empty it equals to 'Unkown'
     }
 }
 
-void draw_game()
+// build game(get user inputs,check logics)
+void build_game()
 {
-    gameOver = isGameOver(enemyX, enemyY, x, y);
-    input();
-    logic();
-    Sleep(20);
+    gameOver = isGameOver(enemyX, enemyY, x, y); // check the enemy hit the bike
+    input();                                     // get users input
+    logic();                                     // check logics
+    Sleep(20);                                   // wait 20 mili-seconds to draw
     if (gameOver)
     {
-        system("cls");
-        std::cout << "\n\n\n"
+        system("cls");        // clear the command line
+        cout << "\n\n\n" // print the ASCII art
                   << overIcon;
-        std::cout << "\n\n\t\t\t\t\tYour Score : " << score;
+        cout << "\n\n\t\t\t\t\tYour Score : " << score;
         Sleep(2000);
     }
-    std::cout << "\n\n\t\tYour Score : " << score;
-    std::cout << "\n\t\tYour PlayerID : " << playerName;
+    cout << "\n\n\t\tYour Score : " << score;
+    cout << "\n\t\tYour PlayerID : " << playerName;
 }
 
+// check the bike hit the enemy
 bool isGameOver(int enemyX, int enemyY, int x, int y)
 {
-    bool condition1 = (enemyX <= x && enemyX + 7 >= x) && (enemyY <= y && enemyY + 4 >= y);
+    bool condition1 = (enemyX <= x && enemyX + 7 >= x) && (enemyY <= y && enemyY + 4 >= y); //  check whether the bike x and y inside the enemyX and enemyY range
     bool condition2 = (enemyX <= x + 7 && enemyX + 7 >= x + 7) && (enemyY <= y && enemyY + 4 >= y);
     if (condition1 || condition2)
     {
-        return true;
+        return true; // return true if the bike hit by the enemy
     }
     return false;
 }
 
 void draw_lv()
 {
-    system("cls");
+    system("cls"); // clear the command line
 
     // upper-map-frame
     for (int i = 0; i <= mapX; i++)
-        std::cout << "#";
-    std::cout << std::endl;
+        cout << "#";
+    cout << std::endl;
 
     // draw-middle-part
-    for (int i = 0; i < mapY; i++)
+    for (int i = 0; i < mapY; i++) // loop through the height of the map
     {
-        for (int j = 0; j < mapX; j++)
+        for (int j = 0; j < mapX; j++) // loop through the width of the map
         {
-            if (j < wallSize)
+            if (j < wallSize) // draw the first line-wall
             {
-                std::cout << "#";
+                cout << "#";
             }
-            if (j >= (mapX - wallSize))
+            if (j >= (mapX - wallSize)) // draw the last line wall
             {
-                std::cout << "#";
+                cout << "#";
             }
             if (j == wallSize)
             {
-                std::cout << " ";
+                cout << " ";
             }
-            if (draw_bike(x, y, j, i) || draw_enemy(enemyX, enemyY, j, i))
+            if (draw_bike(x, y, j, i) || draw_enemy(enemyX, enemyY, j, i)) // draw the enemy and bike
             {
-                std::cout << "#";
+                cout << "#";
             }
-            else if (j >= wallSize && j < (mapX - wallSize))
+            else if (j >= wallSize && j < (mapX - wallSize)) // draw the empty space
             {
-                std::cout << " ";
+                cout << " ";
             }
         }
-        std::cout << std::endl;
+        cout <<endl;
     }
 
     // lower-map-frame
     for (int i = 0; i <= mapX; i++)
-        std::cout << "#";
-    std::cout << std::endl;
+        cout << "#";
+    cout <<endl;
 }
 
 void input()
 {
-    if (_kbhit())
+    if (_kbhit()) // check the user pressed a keyboard button
     {
         char key = _getch(); // Get the key that was pressed
-        switch (key)
+        switch (key)         // switch to specific keyboard function
         {
         case 'a':
             dir = LEFT;
@@ -440,19 +416,18 @@ void input()
         // Clear the input buffer
         while (_kbhit())
         {
-            key =_getch();
+            key = _getch();
         }
-
     }
-    else{
-        dir = STOP;
+    else
+    {
+        dir = STOP; // wehen key is not prssed bike movment will stop
     }
-
 }
 
 void logic()
 {
-    switch (dir)
+    switch (dir) // logic and bike movement speed controll
     {
     case LEFT:
         x -= 3;
@@ -468,7 +443,7 @@ void logic()
         break;
     }
 
-    if (x >= mapX - (wallSize + 8))
+    if (x >= mapX - (wallSize + 8)) // gameOver when bike hit the wall
         gameOver = true;
     else if (x < wallSize)
         gameOver = true;
@@ -477,16 +452,16 @@ void logic()
     else if (y < 0)
         y = mapY - 1;
 
-    enemyY = enemyY + 1;
+    enemyY = enemyY + 1; // moving thd enemy downward
     if (enemyY > mapY)
     {
-        enemyX = wallSize + rand() % static_cast<int>(mapX - (wallSize + 8));
-        enemyY = 1;
-        score = score + 25;
+        enemyX = wallSize + rand() % static_cast<int>(mapX - (wallSize + 8)); // spawn enemy in random poisition
+        enemyY = 1;                                                           // set enemy enemyY cordinates to beginig of the map
+        score = score + 25;                                                   // when enemy passed the map users score wil increase
     }
 }
 
-bool draw_bike(int draw_x, int draw_y, int currentX, int currentY)
+bool draw_bike(int draw_x, int draw_y, int currentX, int currentY) // draw the bike - get x and y cordinates for bike and get current cusur position and output true when the bike can drawn
 {
     if (currentX <= (draw_x + 7) && currentY <= (draw_y + 4))
     {
@@ -559,7 +534,7 @@ bool draw_bike(int draw_x, int draw_y, int currentX, int currentY)
     return false;
 }
 
-bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY)
+bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY) // draw the enemy - get x and y cordinates for bike and get current cusur position and output true when enemy can drawn
 {
     if (currentX <= (draw_x + 7) && currentY <= (draw_y + 4))
     {
@@ -632,14 +607,14 @@ bool draw_enemy(int draw_x, int draw_y, int currentX, int currentY)
     return false;
 }
 
-void credits()
+void credits() // show credits for game
 {
     system("cls");
-    std::cout << "\n\n\t" << playerName << "You got highest score for our little game.";
-    std::cout << asciiArt;
+    cout << "\n\n\t" << playerName << "You got highest score for our little game.";
+    cout << asciiArt;
     Sleep(1500);
     system("cls");
-    std::cout << creditsObj;
-    std::cout << "\n\n\n\n\t\t\t\tPulindu\n\n\t\t\t\tEnuka\n\n\t\t\t\tKesara\n\n\t\t\t\tUshan";
+    cout << creditsObj;
+    cout << "\n\n\n\n\t\t\t\tPulindu\n\n\t\t\t\tEnuka\n\n\t\t\t\tKesara\n\n\t\t\t\tUshan";
     Sleep(2000);
 }
