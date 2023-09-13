@@ -452,7 +452,7 @@ void logic()
     else if (y < 0)
         y = mapY - 1;
 
-    enemyY = enemyY + 1; // moving thd enemy downward
+    enemyY = enemyY + 2; // moving the enemy downward
     if (enemyY > mapY)
     {
         enemyX = wallSize + rand() % static_cast<int>(mapX - (2 * wallSize + 7)); // spawn enemy in random poisition
