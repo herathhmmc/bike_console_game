@@ -2,7 +2,7 @@
 
 ![Game Screenshot](screenshot.png)
 
-Welcome to **Moto-GP**, a thrilling text-based adventure created by a team of talented developers. Join us on this exciting journey as we race through the world of coding and creativity!
+Welcome to **Moto-GP**, a thrilling text-based adventure created by a team of udergraduate students. Join us on this exciting journey as we race through the world of coding and creativity!
 
 ## 🌟 Meet the Team 🌟
 
