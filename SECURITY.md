@@ -45,7 +45,7 @@ As "the-bike-game" is a simple text-based game, it does not have a dedicated sec
 ## Additional Resources
 
 - [C++ Documentation](https://en.cppreference.com/w/)
-- [GitHub Repository](https://github.com/YourUsername/YourRepository)
+- [GitHub Repository](https://github.com/im-ushan-ikshana/bike_console_game/)
 
 ---
 
