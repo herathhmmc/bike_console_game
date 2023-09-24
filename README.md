@@ -40,8 +40,5 @@ Meet the brilliant minds behind this project:
 2. Compile and run the code using your C++ compiler.
 3. Follow the on-screen instructions to play the game.
 
-## 🔓 Open Source 🛡️
-
-This project is open source, and we encourage contributions and improvements from the community. Feel free to fork the repository, make enhancements, and submit pull requests to make the game even more awesome!
 
 🎉 Have a blast playing **Moto-GP**! 🎉
